@@ -1,5 +1,5 @@
 {
-    "name": "sparksinteractive/sector-headless",
+    "name": "sparksi/sector-headless",
     "type": "drupal-profile",
     "description": "Sector is a distribution for Drupal 9.",
     "license": "GPL-2.0-or-later",
@@ -123,6 +123,42 @@
         "asset.packagist": {
             "type": "composer",
             "url": "https://asset-packagist.org"
+        },
+        "ckeditor-plugin/templates": {
+            "type": "package",
+            "package": {
+                "name": "ckeditor-plugin/templates",
+                "version": "4.16.0",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/templates/releases/templates_4.16.0.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        "ckeditor-plugin/link": {
+            "type": "package",
+            "package": {
+                "name": "ckeditor-plugin/link",
+                "version": "4.16.0",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/link/releases/link_4.16.0.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        "ckeditor-plugin/fakeobjects": {
+            "type": "package",
+            "package": {
+                "name": "ckeditor-plugin/fakeobjects",
+                "version": "4.16.2",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://download.ckeditor.com/fakeobjects/releases/fakeobjects_4.16.2.zip",
+                    "type": "zip"
+                }
+            }
         }
     },
     "minimum-stability": "dev",
