@@ -12,20 +12,6 @@ use Drupal\Core\Entity\ContentEntityDeleteForm;
  */
 
 /**
- * Implements hook_page_attachments().
- *
- * Loads the CSS for the admin theme.
- */
-function sector_utils_page_attachments(array &$attachments) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  // Lets just keep this for the default admin theme. If people have changed
-  // they probably have their own styles/look.
-  if ($theme == 'claro') {
-    $attachments['#attached']['library'][] = 'sector_utils/admin';
-  }
-}
-
-/**
  * Implements hook_form_alter().
  */
 function sector_utils_form_alter(&$form, FormStateInterface $form_state, $form_id) {
@@ -36,18 +22,6 @@ function sector_utils_form_alter(&$form, FormStateInterface $form_state, $form_i
  * Implements hook_form_node_form_alter().
  */
 function sector_utils_form_node_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  $theme = \Drupal::theme()->getActiveTheme()->getName();
-  // Lets just keep this for the default admin theme. If people have changed
-  // they probably have their own styles/look.
-  if ($theme == 'claro') {
-    // Shift the status container from the footer into the meta group.
-    $form['status']['#group'] = 'meta';
-    $form['status']['#markup'] = '<h3>' . t('Publishing') . '</h3>';
-    // Clone the form actions into the meta container.
-    $form['meta']['actions'] = $form['actions'];
-    // Make the original actions inaccessible.
-    $form['actions']['#access'] = FALSE;
-  }
 
   // Improve page node status checkbox by changing the label
   // from "Publishing status" to "Publish" and removing the description.
@@ -113,21 +87,5 @@ function sector_utils_contextual_links_view_alter(&$element, $items) {
     if (!$user->hasPermission('configure blocks from contextual links')) {
       unset($element['#links']['block-configure']);
     }
-  }
-}
-
-/**
- * Implements hook_ds_pre_render_alter().
- *
- * Add entity-status-unpublished class to all view modes other than full.
- * CSS in the theme will add a visual indicator to allow editors to recognise
- * unpublished content.
- */
-function sector_utils_ds_pre_render_alter(array &$layout_render_array, array $context, array &$vars) {
-  if ($layout_render_array['#view_mode'] != 'full'
-    && !empty($context['entity'])
-    && $context['entity'] instanceof EntityPublishedInterface
-    && !$context['entity']->isPublished()){
-    $vars['attributes']['class'][] = 'entity-status-unpublished';
   }
 }
